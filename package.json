@@ -4,7 +4,7 @@
   "displayName": "Reve APY Formatter",
   "description": "Applicable Python (APY) Formatter",
   "icon": "logo.png",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "engines": {
     "vscode": "^1.86.2"
   },
@@ -13,68 +13,65 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/SkyReve/reve-apy-formatter.git"
+    "url": "https://github.com/SkyReve/apy-formatter.git"
   },
   "bugs": {
-    "url": "https://github.com/SkyReve/reve-apy-formatter/issues"
+    "url": "https://github.com/SkyReve/apy-formatter/issues"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "workspaceContains:**/*.apy"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "APY Formatter",
-      "properties": {
-        "applicablePythonFormatter.formatter": {
-          "type": "string",
-          "enum": [
-            "None",
-            "black",
-            "autopep8",
-            "ruff"
-          ],
-          "default": "None",
-          "description": "Select the formatter to use for your APY code."
-        },
-        "applicablePythonFormatter.executablePath": {
-          "type": "string",
-          "default": "black",
-          "description": "Path to the formatter executable."
-        },
-        "applicablePythonFormatter.lineLength": {
-          "type": "number",
-          "default": 88,
-          "description": "Maximum line length for the formatter."
-        }
-      }
-    },
     "languages": [
       {
-        "id": "applicablePython",
+        "id": "apy",
         "aliases": [
-          "Applicable Python"
+          "APY",
+          "apy"
         ],
         "extensions": [
           ".apy"
-        ],
-        "configuration": "./language/configuration.json"
+        ]
       }
     ],
-    "grammars": [
+    "commands": [
       {
-        "language": "applicablePython",
-        "scopeName": "source.applicablepython",
-        "path": "./language/grammars.json"
+        "command": "apy.openVirtualPython",
+        "title": "APY: Open Virtual Python"
+      },
+      {
+        "command": "apy.initializeWorkspace",
+        "title": "APY: Initialize Workspace"
       }
     ],
-    "documentFormattingEditProviders": [
-      {
-        "language": "applicablePython",
-        "scheme": "file",
-        "command": "extension.formatDocument"
+    "configuration": {
+      "title": "APY",
+      "properties": {
+        "apy.bootstrap.promptMode": {
+          "type": "string",
+          "enum": [
+            "always",
+            "onMissing",
+            "never"
+          ],
+          "default": "always",
+          "description": "Controls whether APY prompts to create workspace files when missing."
+        }
       }
-    ]
+    },
+    "configurationDefaults": {
+      "python.languageServer": "Pylance",
+      "python.analysis.diagnosticMode": "workspace",
+      "files.associations": {
+        "*.apy": "python"
+      }
+    }
   },
+  "extensionDependencies": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

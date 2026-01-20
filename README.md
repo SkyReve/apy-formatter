@@ -1,41 +1,83 @@
-# SkyReve APY Formatter for VS Code
+# Reve APY Formatter
 
-SkyReve APY Formatter is a VS Code extension designed for formatting **Applicable Python (APY) files**. APY files contain only function bodies, with hidden function prototypes and predefined global variables such as `reve`. This extension provides **auto formatting and auto completion** to enhance the APY development experience.
+> Full IntelliSense for Applicable Python (APY) files — auto-completion, go-to-definition, hover, signature help, and real-time diagnostics.
 
-## Features
+[![VS Code](https://img.shields.io/badge/VS%20Code-1.86+-blue.svg)](https://code.visualstudio.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-- **Code Formatting:** Supports multiple formatters (`Black`, `Ruff`, and `autopep8`) for APY files.
-- **Auto Completion:** Provides completions based on `reve` global members and hidden imports.
-- **Customizable Formatting Rules:** Users can configure formatting preferences for each formatter.
-- **Seamless Integration:** Works like Python in VS Code while adapting to the APY function-body-only structure.
+---
 
-## Requirements
+## ✨ Features
 
-- **Python 3.7+** must be installed and available in the system's `PATH`.
-- At least one of the following formatters must be installed:
-  - [Black](https://pypi.org/project/black/) (`pip install black`)
-  - [Ruff](https://docs.astral.sh/ruff/) (`pip install ruff`)
-  - [autopep8](https://pypi.org/project/autopep8/) (`pip install autopep8`)
+| Feature | Description |
+|---------|-------------|
+| **Auto-Completion** | Smart suggestions for modules, functions, classes, and runtime objects |
+| **Go to Definition** | Jump to source with `Ctrl+Click` or `F12` |
+| **Hover Info** | View function signatures on mouse hover |
+| **Signature Help** | Parameter hints while typing function calls |
+| **Diagnostics** | Real-time syntax and type errors powered by Pylance |
 
-## Extension Settings
+---
 
-The extension provides customizable settings under `applicablePythonFormatter`. Users can adjust formatter options as follows:
+## 🚀 Quick Start
 
-```json
-{
-  "applicablePythonFormatter.formatter": "black",
-  "applicablePythonFormatter.lineLength": 88,
-  "applicablePythonFormatter.executablePath": "/path/to/formatter-executable"
-}
+1. **Install** the extension from VS Code Marketplace
+2. **Open** a folder containing `.apy` files
+3. **Done!** IntelliSense works automatically
+
+The extension will prompt you to create configuration files for optimal experience.
+
+---
+
+## 📁 Supported Project Structure
+
+```
+your-project/
+├── src/
+│   ├── apis/          # API endpoint files (*.apy)
+│   ├── libs/          # Shared library modules (*.apy, *.py)
+│   └── tables/        # Table definitions (*.yaml)
+├── pyrightconfig.json # Auto-generated
+└── apy_runtime.pyi    # Auto-generated
 ```
 
-## Known Issues
+---
 
-- Completion suggestions are limited to the `reve` global variable.
-- Formatting may be inconsistent if multiple formatters are installed but not properly configured.
+## ⚙️ Commands
 
-If you encounter any bugs, issues, or have feature requests, please report them on [GitHub Issues](https://github.com/SkyReve/reve-apy-formatter/issues)
+| Command | Description |
+|---------|-------------|
+| `APY: Initialize Workspace` | Create or update configuration files |
+| `APY: Open Virtual Python` | View the generated Python file for debugging |
 
-## License
+---
 
-This extension is licensed under the **MIT License**.
+## 🔧 Settings
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `apy.bootstrap.promptMode` | `always` | When to prompt for missing config files (`always`, `onMissing`, `never`) |
+
+---
+
+## 📋 Requirements
+
+This extension automatically installs and configures:
+
+- **Python** extension
+- **Pylance** extension
+
+No additional setup required.
+
+---
+
+## 🐛 Issues & Feedback
+
+Found a bug or have a feature request?  
+Please report on [GitHub Issues](https://github.com/SkyReve/apy-formatter/issues).
+
+---
+
+## 📄 License
+
+MIT License — see [LICENSE](LICENSE) for details.
