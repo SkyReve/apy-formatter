@@ -16,18 +16,20 @@ interface PyrightConfig {
   include?: string[];
   exclude?: string[];
   ignore?: string[];
+  reportMissingModuleSource?: boolean;
   executionEnvironments?: { root: string; extraPaths?: string[] }[];
   [key: string]: unknown;
 }
 
 const REQUIRED_PYRIGHT_CONFIG: PyrightConfig = {
   include: [".reve/apy"],
-  exclude: ["**/.*"],
+  exclude: ["**/__pycache__", "**/node_modules"],
   ignore: ["**/*.apy"],
+  reportMissingModuleSource: false,
   executionEnvironments: [
     {
       root: ".",
-      extraPaths: [".reve/apy/libs", "src/libs", "src/apis"],
+      extraPaths: [".", ".reve/apy/libs", "src/libs", "src/apis"],
     },
   ],
 };
@@ -38,13 +40,35 @@ function mergeArrayUnique(existing: string[] | undefined, required: string[]): s
   return Array.from(set);
 }
 
+function mergeExecutionEnvironments(
+  existing: { root: string; extraPaths?: string[] }[] | undefined,
+): { root: string; extraPaths?: string[] }[] {
+  const requiredExtraPaths = REQUIRED_PYRIGHT_CONFIG.executionEnvironments![0].extraPaths!;
+
+  if (!existing || existing.length === 0) {
+    return REQUIRED_PYRIGHT_CONFIG.executionEnvironments!;
+  }
+
+  // Merge extraPaths into the first execution environment (root: ".")
+  return existing.map((env, index) => {
+    if (index === 0 && env.root === ".") {
+      return {
+        ...env,
+        extraPaths: mergeArrayUnique(env.extraPaths, requiredExtraPaths),
+      };
+    }
+    return env;
+  });
+}
+
 function mergePyrightConfig(existing: PyrightConfig): PyrightConfig {
   return {
     ...existing,
     include: mergeArrayUnique(existing.include, REQUIRED_PYRIGHT_CONFIG.include!),
     exclude: mergeArrayUnique(existing.exclude, REQUIRED_PYRIGHT_CONFIG.exclude!),
     ignore: mergeArrayUnique(existing.ignore, REQUIRED_PYRIGHT_CONFIG.ignore!),
-    executionEnvironments: existing.executionEnvironments ?? REQUIRED_PYRIGHT_CONFIG.executionEnvironments,
+    reportMissingModuleSource: existing.reportMissingModuleSource ?? REQUIRED_PYRIGHT_CONFIG.reportMissingModuleSource,
+    executionEnvironments: mergeExecutionEnvironments(existing.executionEnvironments),
   };
 }
 
@@ -54,9 +78,16 @@ function getDefaultPyrightConfig(): string {
 
 function isPyrightConfigComplete(config: PyrightConfig): boolean {
   const hasInclude = config.include?.includes(".reve/apy") ?? false;
-  const hasExclude = config.exclude?.includes("**/.*") ?? false;
   const hasIgnore = config.ignore?.includes("**/*.apy") ?? false;
-  return hasInclude && hasExclude && hasIgnore;
+  const hasReportMissingModuleSource = config.reportMissingModuleSource === false;
+
+  // Check if extraPaths contains required paths
+  const firstEnv = config.executionEnvironments?.[0];
+  const extraPaths = firstEnv?.extraPaths ?? [];
+  const hasRootPath = extraPaths.includes(".");
+  const hasLibsPath = extraPaths.includes(".reve/apy/libs");
+
+  return hasInclude && hasIgnore && hasReportMissingModuleSource && hasRootPath && hasLibsPath;
 }
 
 async function readPyrightConfig(uri: vscode.Uri): Promise<PyrightConfig | null> {

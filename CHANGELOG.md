@@ -2,7 +2,7 @@
 
 All notable changes to the "reve-apy-formatter" extension will be documented in this file.
 
-## [0.3.0] - 2026-01-21
+## [0.3.1] - 2026-01-22
 
 ### Added
 - **Go to Definition** for functions, classes, and variables in `src/libs`

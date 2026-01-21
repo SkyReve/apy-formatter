@@ -5,8 +5,6 @@
 [![VS Code](https://img.shields.io/badge/VS%20Code-1.86+-blue.svg)](https://code.visualstudio.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
----
-
 ## ✨ Features
 
 | Feature | Description |
@@ -17,8 +15,6 @@
 | **Signature Help** | Parameter hints while typing function calls |
 | **Diagnostics** | Real-time syntax and type errors powered by Pylance |
 
----
-
 ## 🚀 Quick Start
 
 1. **Install** the extension from VS Code Marketplace
@@ -26,8 +22,6 @@
 3. **Done!** IntelliSense works automatically
 
 The extension will prompt you to create configuration files for optimal experience.
-
----
 
 ## 📁 Supported Project Structure
 
@@ -41,8 +35,6 @@ your-project/
 └── apy_runtime.pyi    # Auto-generated
 ```
 
----
-
 ## ⚙️ Commands
 
 | Command | Description |
@@ -50,15 +42,11 @@ your-project/
 | `APY: Initialize Workspace` | Create or update configuration files |
 | `APY: Open Virtual Python` | View the generated Python file for debugging |
 
----
-
 ## 🔧 Settings
 
 | Setting | Default | Description |
 |---------|---------|-------------|
 | `apy.bootstrap.promptMode` | `always` | When to prompt for missing config files (`always`, `onMissing`, `never`) |
-
----
 
 ## 📋 Requirements
 
@@ -69,14 +57,10 @@ This extension automatically installs and configures:
 
 No additional setup required.
 
----
-
 ## 🐛 Issues & Feedback
 
 Found a bug or have a feature request?  
 Please report on [GitHub Issues](https://github.com/SkyReve/apy-formatter/issues).
-
----
 
 ## 📄 License
 
