@@ -7,13 +7,13 @@
 
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| **Auto-Completion** | Smart suggestions for modules, functions, classes, and runtime objects |
-| **Go to Definition** | Jump to source with `Ctrl+Click` or `F12` |
-| **Hover Info** | View function signatures on mouse hover |
-| **Signature Help** | Parameter hints while typing function calls |
-| **Diagnostics** | Real-time syntax and type errors powered by Pylance |
+| Feature              | Description                                                            |
+| -------------------- | ---------------------------------------------------------------------- |
+| **Auto-Completion**  | Smart suggestions for modules, functions, classes, and runtime objects |
+| **Go to Definition** | Jump to source with `Ctrl+Click` or `F12`                              |
+| **Hover Info**       | View function signatures on mouse hover                                |
+| **Signature Help**   | Parameter hints while typing function calls                            |
+| **Diagnostics**      | Real-time syntax and type errors powered by Pylance                    |
 
 ## 🚀 Quick Start
 
@@ -37,25 +37,16 @@ your-project/
 
 ## ⚙️ Commands
 
-| Command | Description |
-|---------|-------------|
-| `APY: Initialize Workspace` | Create or update configuration files |
-| `APY: Open Virtual Python` | View the generated Python file for debugging |
+| Command                     | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| `APY: Initialize Workspace` | Create or update configuration files         |
+| `APY: Open Virtual Python`  | View the generated Python file for debugging |
 
 ## 🔧 Settings
 
-| Setting | Default | Description |
-|---------|---------|-------------|
+| Setting                    | Default  | Description                                                              |
+| -------------------------- | -------- | ------------------------------------------------------------------------ |
 | `apy.bootstrap.promptMode` | `always` | When to prompt for missing config files (`always`, `onMissing`, `never`) |
-
-## 📋 Requirements
-
-This extension automatically installs and configures:
-
-- **Python** extension
-- **Pylance** extension
-
-No additional setup required.
 
 ## 🐛 Issues & Feedback
 
